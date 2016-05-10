@@ -159,7 +159,18 @@ public class Map implements ActionListener{
      if the new piece is J*Man, store it in field jMan.
      Precondition: typ is one of the piece constants in class Piece.*/
     public void putNew(int typ, int x, int y){
-        
+    	if (isEmpty(x, y)) {
+			if (typ == Piece.BLOCK)
+				grid[x][y] = new Block(x, y, this);
+			else if (typ == Piece.JMAN) {
+				jMan = new JMan(x, y, Piece.rand(0, 2), this);
+				grid[x][y] = jMan;
+			} else if (typ == Piece.WALKER) {
+				grid[x][y] = new Walker(x, y, Piece.rand(0, 2), this);
+			} else if (typ == Piece.PILLAR) {
+				grid[x][y] = new Pillar(x, y, Piece.rand(0, 2), this);
+			}
+		}
     }
     
     /** = "(x, y) is inside the grid". */
